@@ -1,31 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import './App.css';
-
-interface Person {
-  id: number;
-  name: string;
-  age: number;
-}
-
-interface Props {
-  people: Array<Person>;
-}
-
-const PeopleList: React.FC<Props> = ({ people }) => {
-  if (!people.length) return <p>Loading...</p>;
-
-  return (
-    <>
-      {people.map((p) => {
-        return (
-          <p key={p.id}>
-            {p.name} / {p.age}
-          </p>
-        );
-      })}
-    </>
-  );
-};
+import PeopleList from './components/PeopleList';
+import { Person } from './interfaces/person.interface';
+import { useEffect, useState } from 'react';
 
 function App() {
   const [people, setPeople] = useState<Person[]>([]);
@@ -45,7 +21,7 @@ function App() {
 
   return (
     <div className="App">
-      {error ? <p>Error: {error}</p> : <PeopleList people={people} />}
+      <PeopleList people={people} error={error} />
     </div>
   );
 }
